@@ -1,4 +1,4 @@
-'use client';
+'use client'
 
 import {
   Combobox,
@@ -6,56 +6,56 @@ import {
   ComboboxInput,
   ComboboxOption,
   ComboboxOptions,
-} from '@headlessui/react';
-import { CheckIcon, ChevronDownIcon } from '@heroicons/react/20/solid';
-import clsx from 'clsx';
-import { useState, useEffect } from 'react';
+} from '@headlessui/react'
+import { CheckIcon, ChevronDownIcon } from '@heroicons/react/20/solid'
+import clsx from 'clsx'
+import { useState, useEffect } from 'react'
 
-type Item = { id: number; name: string };
+type Item = { id: number; name: string }
 const initialPeople: Item[] = [
   { id: 1, name: 'Tom Cook' },
   { id: 2, name: 'Wade Cooper' },
   { id: 3, name: 'Tanya Fox' },
   { id: 4, name: 'Arlene Mccoy' },
   { id: 5, name: 'Devon Webb' },
-];
+]
 
-const LOCAL_STORAGE_KEY = 'peopleList';
+const LOCAL_STORAGE_KEY = 'peopleList'
 
 export function ComboboxTest() {
-  const [query, setQuery] = useState('');
-  const [selected, setSelected] = useState(initialPeople[1]);
+  const [query, setQuery] = useState('')
+  const [selected, setSelected] = useState(initialPeople[1])
   const [people, setPeople] = useState<Item[]>(() => {
     if (typeof window !== 'undefined') {
       // Check if we're in the browser
-      const storedPeople = localStorage.getItem(LOCAL_STORAGE_KEY);
-      return storedPeople ? JSON.parse(storedPeople) : initialPeople;
+      const storedPeople = localStorage.getItem(LOCAL_STORAGE_KEY)
+      return storedPeople ? JSON.parse(storedPeople) : initialPeople
     }
-    return initialPeople;
-  });
+    return initialPeople
+  })
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
       // Only access localStorage in the browser
-      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(people));
+      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(people))
     }
-  }, [people]);
+  }, [people])
 
   const filteredPeople =
     query === ''
       ? people
       : people.filter((person) => {
-          return person.name.toLowerCase().includes(query.toLowerCase());
-        });
+          return person.name.toLowerCase().includes(query.toLowerCase())
+        })
 
   const addPerson = () => {
-    const name = window.prompt('Enter the name of the new person:');
+    const name = window.prompt('Enter the name of the new person:')
     if (name) {
-      const newPerson = { id: people.length + 1, name };
-      setPeople([...people, newPerson]);
-      // setSelected(newPerson); // Optional: Automatically select the new person
+      const newPerson = { id: people.length + 1, name }
+      setPeople([...people, newPerson])
+      setSelected(newPerson)
     }
-  };
+  }
 
   return (
     <div className="mx-auto h-screen flex items-center gap-2 pt-20">
@@ -109,5 +109,5 @@ export function ComboboxTest() {
         Add
       </button>
     </div>
-  );
+  )
 }
