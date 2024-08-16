@@ -1,4 +1,5 @@
 import { FirstComponent } from '@/components/FirstComponent';
+import { ComboboxTest } from '@/components/Combobox';
 
 export default function Home() {
   return (
@@ -6,6 +7,7 @@ export default function Home() {
       <FirstComponent
         text={"hello world, it's working. Time to get started!"}
       />
+      <ComboboxTest />
     </main>
   );
 }
