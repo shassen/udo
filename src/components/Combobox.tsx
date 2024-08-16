@@ -10,6 +10,7 @@ import {
 import { CheckIcon, ChevronDownIcon } from '@heroicons/react/20/solid'
 import clsx from 'clsx'
 import { useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
 
 type Item = { id: number; name: string }
 const initialPeople: Item[] = [
@@ -23,6 +24,8 @@ const initialPeople: Item[] = [
 const LOCAL_STORAGE_KEY = 'peopleList'
 
 export function ComboboxTest() {
+  // const router = useRouter()
+  // console.log('router: ', router)
   const [query, setQuery] = useState('')
   const [selected, setSelected] = useState(initialPeople[1])
   const [people, setPeople] = useState<Item[]>(() => {
@@ -39,6 +42,7 @@ export function ComboboxTest() {
       // Only access localStorage in the browser
       localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(people))
     }
+    // router.query.name = query
   }, [people])
 
   const filteredPeople =
@@ -58,12 +62,13 @@ export function ComboboxTest() {
   }
 
   return (
-    <div className="mx-auto h-screen flex items-center gap-2 pt-20">
+    <div className="mx-auto flex items-start gap-2 pt-3">
       <Combobox
         value={selected}
-        onChange={(value: Item) => setSelected(value)}
+        onChange={(value: Item) => {
+          setSelected(value)
+        }}
         onClose={() => setQuery('')}
-        __demoMode
       >
         <div className="relative">
           <ComboboxInput
@@ -72,7 +77,10 @@ export function ComboboxTest() {
               'focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-white/25'
             )}
             displayValue={(person: Item | null) => (person ? person.name : '')}
-            onChange={(event) => setQuery(event.target.value)}
+            onChange={(event) => {
+              // console.log('event: ', event.target.value)
+              setQuery(event.target.value)
+            }}
           />
           <ComboboxButton className="group absolute inset-y-0 right-0 px-2.5">
             <ChevronDownIcon className="size-4 fill-white/60 group-data-[hover]:fill-white" />
