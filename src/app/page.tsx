@@ -1,5 +1,5 @@
-import { FirstComponent } from '@/components/FirstComponent';
-import { ComboboxTest } from '@/components/Combobox';
+import { FirstComponent } from '@/components/FirstComponent'
+import { ComboboxTest } from '@/components/Combobox'
 
 export default function Home() {
   return (
@@ -9,5 +9,5 @@ export default function Home() {
       />
       <ComboboxTest />
     </main>
-  );
+  )
 }
