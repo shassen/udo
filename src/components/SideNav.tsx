@@ -6,7 +6,7 @@ export function SideNav() {
       <section className="h-[10vh] m-2 w-[95%] border-2 border-red-300">
         <ComboboxTest />
       </section>
-      <section className="flex h-[80vh] justify-center w-[95%] border-2 border-red-300">
+      <section className="flex h-[86vh] justify-center w-[95%] border-2 border-red-300">
         test
       </section>
     </main>
